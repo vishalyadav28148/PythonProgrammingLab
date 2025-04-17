@@ -1,50 +1,46 @@
-def bal(balance):
-    print(balace)
-    
-def credit(balance,value):
-    transactions.append(value)
-    balance+=value
-    return balance
-    
-def credit(balance,value):
-    transactions.append(-value)
-    balance-=value
-    return balance
-    
-transaction=[]
+def credit(amount,bal,transaction):
+    bal+=amount
+    print(amount,"added successfully")
+    transaction.append(amount)
+    return bal,transaction
 
-def last_transactions():
-    print("Last 5 transactions:")
-    for t in transactions[-5:]:
-        if t<0:
-            print(f"Debited:{t}")
-        else:
-            print(f"Credited:{t}")
-            
-balance=0
-print("1.Credit")
-print("2.Debit")
-print("3.Show Balance")
-print("4.Show Last 5 Transactions")
-print("Exit")
+def debit(amount,bal,transaction):
+    if bal<amount:
+        print('Insufficient Balance')
+    else:
+        bal-=amount
+        print(amount,"debited successfully")
+        transaction.append(-amount)
+        return bal,transaction
+    
+def showBalance(bal):
+    print('bal:',bal)
 
+def lastFiveTransactions(transaction):
+    print("transaction are:",transaction)
+
+
+
+
+bal = 0
+transaction = []
 while True:
-    try:
-        a=int(input("Enter the option:"))
-        if a==1:
-            x=int(input("ENTER THE AMOUNT TO BE CREDITED:"))
-            balance=credit(balance,x)
-            print("Balance is",end="")bal(balance)
-        elif a==2:
-            y=int(input("ENTER THE AMOUNT TO BE DEBITED:"))
-            balance=debit(balance,y)
-            print("Balance is",end="")bal(balance)
-        elif a==3:
-            print("Balance is",end="")bal(balance)
-        elif a==4:
-            last_transactions()
-            elif a==5:
-                print("Exiting... Have a great day!")
-                break
-            else:
-                print("")
+    print("welcome to bank app")
+    print("press 1 for credit")
+    print("press 2 for debit")
+    print("press 3 for show bal")
+    print("press 4 for last 5 time")
+    print("press 5 for exit")
+    choice = int(input("enter the choice"))
+    if(choice==1):
+        amount=int(input("enter the amount"))
+        bal,transaction=credit(amount,bal,transaction)
+    elif(choice==2):
+        amount=int(input("enter the amount"))
+        bal,transaction=debit(amount,bal,transaction)
+    elif(choice ==3):
+        showBalance(bal)
+    elif(choice ==4):
+        lastFiveTransactions(transaction)
+    else:
+        break
